@@ -15,6 +15,15 @@ jobs:
           enable-stack: true
           stack-version: 'latest'
           stack-no-global: true
+      - name: "Install dependencies"
+        run: |
+          cabal install fourmolu
+          sudo apt update
+          sudo apt install hlint
+      - name: "Lint & Format"
+        run: |
+          hlint app src test
+          fourmolu --mode check app src test
       - name: "Build"
         run: stack build
       - name: "Test"
