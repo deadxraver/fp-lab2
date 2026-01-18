@@ -6,9 +6,15 @@ on: [push]
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    container: haskell:9.4
     steps:
       - uses: actions/checkout@v4
+      - uses: haskell-actions/setup@v2
+        id: setup-haskell
+        with:
+          ghc-version: 'latest'
+          enable-stack: true
+          stack-version: 'latest'
+          stack-no-global: true
       - name: "Build"
         run: stack build
       - name: "Test"
