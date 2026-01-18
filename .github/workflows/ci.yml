@@ -15,8 +15,7 @@ jobs:
       - name: "Install dependencies"
         run: |
           apt update
-          apt install ghc -y
-          curl -sSL https://get.haskellstack.org/ | sh
+          apt install ghc haskell-stack -y
       - name: "Build"
         run: stack build
       - name: "Test"
