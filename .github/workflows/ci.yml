@@ -17,8 +17,7 @@ jobs:
           stack-no-global: true
       - name: "Install dependencies"
         run: |
-          cabal update
-          cabal install fourmolu
+          stack install fourmolu
           sudo apt update
           sudo apt install hlint
       - name: "Lint & Format"
