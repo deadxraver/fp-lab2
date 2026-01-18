@@ -3,18 +3,18 @@ run-name: "build & test"
 
 on: [push]
 
-env:
-  GH_TOKEN: ${{github.token}}
-
 jobs:
   build-test:
     runs-on: ubuntu-latest
     container: ubuntu:24.04
     steps:
       - uses: actions/checkout@v4
-      - name: "Install dependencies"
-        run: |
-          apt update
-          apt install ghc haskell-stack -y
+      - uses: haskell-actions/setup@v2
+        with:
+          ghc-version: '9.4.8'
+          enable-stack: true
+          stack-version: 'latest'
+      - name: "Build"
+        run: stack build
       - name: "Test"
         run: stack test
