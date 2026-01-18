@@ -15,7 +15,7 @@ jobs:
           apt install -y curl wget gnupg2 software-properties-common
       - uses: haskell-actions/setup@v2
         with:
-          ghc-version: '9.4.8'
+          ghc-version: 'latest'
           enable-stack: true
           stack-version: 'latest'
       - name: "Build"
