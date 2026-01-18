@@ -9,4 +9,6 @@ headNode :: TreeNode
 headNode = TreeHead [someNode]
 
 main :: IO ()
-main = putStrLn (show headNode)
+main = do
+        putStrLn (show headNode)
+        putStrLn (show (toList headNode))
