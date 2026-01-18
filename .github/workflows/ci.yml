@@ -6,18 +6,9 @@ on: [push]
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    container: ubuntu:24.04
+    container: haskell:9.4
     steps:
       - uses: actions/checkout@v4
-      - name: "Install dependencies"
-        run: |
-          apt update
-          apt install -y curl wget gnupg2 software-properties-common
-      - uses: haskell-actions/setup@v2
-        with:
-          ghc-version: 'latest'
-          enable-stack: true
-          stack-version: 'latest'
       - name: "Build"
         run: stack build
       - name: "Test"
