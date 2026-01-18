@@ -9,6 +9,10 @@ jobs:
     container: ubuntu:24.04
     steps:
       - uses: actions/checkout@v4
+      - name: "Install dependencies"
+        run: |
+          apt update
+          apt install -y curl wget gnupg2 software-properties-common
       - uses: haskell-actions/setup@v2
         with:
           ghc-version: '9.4.8'
