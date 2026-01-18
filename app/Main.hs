@@ -1,6 +1,11 @@
 module Main (main) where
 
-import Lib
+import Tree
+
+someNode :: TreeNode
+someNode = TreeNode 'A' [LeafNode]
+
+headNode = HeadNode [someNode]
 
 main :: IO ()
-main = someFunc
+main = putStrLn show headNode
