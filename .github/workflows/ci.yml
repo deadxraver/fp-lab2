@@ -16,7 +16,5 @@ jobs:
         run: |
           apt update
           apt install ghc haskell-stack -y
-      - name: "Build"
-        run: stack build
       - name: "Test"
         run: stack test
