@@ -3,9 +3,10 @@ module Main (main) where
 import Tree
 
 someNode :: TreeNode
-someNode = TreeNode 'A' [LeafNode]
+someNode = TreeNode 'A' [TreeLeaf]
 
-headNode = HeadNode [someNode]
+headNode :: TreeNode
+headNode = TreeHead [someNode]
 
 main :: IO ()
-main = putStrLn show headNode
+main = putStrLn (show headNode)
