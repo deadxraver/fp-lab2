@@ -11,4 +11,4 @@ headNode = TreeHead [someNode]
 main :: IO ()
 main = do
     print headNode
-    print toList headNode
+    print $ toList headNode
