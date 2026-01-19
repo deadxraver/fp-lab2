@@ -110,7 +110,7 @@ toList' (TreeHead _) _ = error "TreeHead should not be here"
 
 toList :: TreeNode -> [String]
 toList (TreeHead []) = []
-toList (TreeHead (node : list)) = toList' node "" ++ toList (TreeHead list)
+toList (TreeHead (node : list)) = filter (/= "") (toList' node "" ++ toList (TreeHead list))
 
 clear :: TreeNode -> TreeNode
 clear (TreeHead _) = emptyTree
