@@ -65,8 +65,8 @@ insert (c : str) (TreeNode c' list) =
 
 remove :: String -> TreeNode -> TreeNode
 remove "" (TreeHead list) = TreeHead list -- neutral elem
-remove "" (TreeNode c list) = TreeNode c list
-remove "" TreeLeaf = TreeHead [] -- signal that we should not add it to upper list
+remove "" (TreeNode c list) = TreeNode c (filter (/= TreeLeaf) list)
+remove "" TreeLeaf = TreeLeaf
 remove _ TreeLeaf = TreeLeaf
 remove (c : str) (TreeHead list) =
     case findChild c list of

@@ -11,7 +11,7 @@ main = do
     removeTest
 
 runTest :: Bool -> String -> IO ()
-runTest cond testName = print $ if cond then testName ++ " test passed" else error (testName ++ "test failed")
+runTest cond testName = print $ if cond then testName ++ " test passed" else error (testName ++ " test failed")
 
 setTest :: IO ()
 setTest = runTest (fromList list1 == fromList list1dup) "Set"
