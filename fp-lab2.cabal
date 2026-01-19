@@ -55,6 +55,8 @@ test-suite fp-lab2-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      PropertyBased
+      Unit
       Paths_fp_lab2
   autogen-modules:
       Paths_fp_lab2
