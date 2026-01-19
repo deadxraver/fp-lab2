@@ -9,6 +9,7 @@ main :: IO ()
 main = do
     setTest
     mapTest
+    filterTest
     removeTest
 
 runTest :: Bool -> String -> IO ()
@@ -22,3 +23,6 @@ removeTest = runTest (emptyTree == remove "hello" (fromList ["hello"])) "Remove"
 
 mapTest :: IO ()
 mapTest = runTest (map' toUpperCase (fromList ["hello"]) == fromList ["HELLO"]) "Map"
+
+filterTest :: IO ()
+filterTest = runTest (filter' (\s -> length s > 5) (fromList ["1234", "12345", "123456"]) == fromList ["123456"]) "Filter"
