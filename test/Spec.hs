@@ -8,6 +8,13 @@ list1 = ["hello"]
 main :: IO ()
 main = do
     setTest
+    removeTest
+
+runTest :: Bool -> String -> IO ()
+runTest cond testName = print $ if cond then testName ++ " test passed" else error (testName ++ "test failed")
 
 setTest :: IO ()
-setTest = print $ if fromList list1 == fromList list1dup then "Set Test passed" else error "Set Test failed"
+setTest = runTest (fromList list1 == fromList list1dup) "Set"
+
+removeTest :: IO ()
+removeTest = runTest (emptyTree == remove "hello" (fromList ["hello"])) "Remove"

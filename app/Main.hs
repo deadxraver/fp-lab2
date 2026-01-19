@@ -18,5 +18,6 @@ main = do
     print nodeFromStr
     print $ toList nodeFromStr
     print $ toList $ insert "hello" nodeFromStr
+    print $ toList $ remove "hell" nodeFromStr
     print $ toList $ fromList ["Abab", "AZaz"]
     print $ toList $ fromList ["hello", "hello"]
