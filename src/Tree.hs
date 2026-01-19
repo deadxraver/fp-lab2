@@ -72,20 +72,20 @@ remove (c : str) (TreeHead list) =
     case findChild c list of
         Nothing -> TreeHead list
         Just node ->
-          if isHead node'
-            then TreeHead (filter (/= node) list)
-            else TreeHead $ replaceChild node node' list
-              where
-                node' = remove str node
+            if isHead node'
+                then TreeHead (filter (/= node) list)
+                else TreeHead $ replaceChild node node' list
+          where
+            node' = remove str node
 remove (c : str) (TreeNode c' list) =
     case findChild c list of
         Nothing -> TreeHead list
         Just node ->
-          if isHead node'
-            then if length list == 1 then TreeHead [] else TreeNode c' (filter (/= node) list)
-            else TreeNode c' $ replaceChild node node' list
-              where
-                node' = remove str node
+            if isHead node'
+                then if length list == 1 then TreeHead [] else TreeNode c' (filter (/= node) list)
+                else TreeNode c' $ replaceChild node node' list
+          where
+            node' = remove str node
 
 fromList' :: [String] -> TreeNode -> TreeNode
 fromList' list node = foldr insert node list
