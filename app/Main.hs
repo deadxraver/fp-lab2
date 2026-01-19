@@ -13,6 +13,8 @@ nodeFromStr = insert "hell" emptyTree
 
 main :: IO ()
 main = do
+    print $ remove "hell" (insert "hello" nodeFromStr)
+    print $ remove "hell" nodeFromStr
     print headNode
     print $ toList headNode
     print nodeFromStr

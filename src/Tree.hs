@@ -7,11 +7,11 @@ module Tree (
     clear,
     emptyTree,
     map',
-    toUpperCase
+    toUpperCase,
 ) where
 
-import Data.List (find)
 import Data.Char
+import Data.List (find)
 
 data TreeNode = TreeNode Char [TreeNode] | TreeHead [TreeNode] | TreeLeaf deriving (Eq, Show)
 
@@ -68,7 +68,10 @@ insert (c : str) (TreeNode c' list) =
 
 remove :: String -> TreeNode -> TreeNode
 remove "" (TreeHead list) = TreeHead list -- neutral elem
-remove "" (TreeNode c list) = TreeNode c (filter (/= TreeLeaf) list)
+remove "" (TreeNode c list) =
+    if newlist /= [] then TreeNode c newlist else TreeHead []
+  where
+    newlist = filter (/= TreeLeaf) list
 remove "" TreeLeaf = TreeLeaf
 remove _ TreeLeaf = TreeLeaf
 remove (c : str) (TreeHead list) =
@@ -116,4 +119,4 @@ map' f (TreeHead list) = fromList (map f (toList (TreeHead list)))
 map' _ _ = error "Map should be applied to head"
 
 toUpperCase :: String -> String
-toUpperCase s = map toUpper s
+toUpperCase = map toUpper
