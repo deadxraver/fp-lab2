@@ -12,6 +12,8 @@ main = do
     filterTest
     removeTest
     prefixTest
+    monoTest1
+    monoTest2
 
 runTest :: Bool -> String -> IO ()
 runTest cond testName = print $ if cond then testName ++ " test passed" else error (testName ++ " test failed")
@@ -30,3 +32,9 @@ filterTest = runTest (filter' (\s -> length s > 5) (fromList ["1234", "12345", "
 
 prefixTest :: IO ()
 prefixTest = runTest (startWith "ab" (fromList ["a", "ab", "aba", "abb", "abba", "ba", "bba"]) == ["ab", "aba", "abb", "abba"]) "Prefix"
+
+monoTest1 :: IO ()
+monoTest1 = runTest (fromList ["hello"] <> emptyTree == fromList ["hello"]) "Mono1"
+
+monoTest2 :: IO ()
+monoTest2 = runTest ((fromList ["str1"] <> fromList ["str2"]) <> fromList ["str3"] == fromList ["str1"] <> (fromList ["str2"] <> fromList ["str3"])) "Mono2"

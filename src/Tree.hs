@@ -13,9 +13,9 @@ module Tree (
 ) where
 
 import Data.Char
-import Data.List (find)
+import Data.List (find, sort)
 
-data TreeNode = TreeNode Char [TreeNode] | TreeHead [TreeNode] | TreeLeaf deriving (Eq, Show)
+data TreeNode = TreeNode Char [TreeNode] | TreeHead [TreeNode] | TreeLeaf deriving (Show)
 
 emptyTree :: TreeNode
 emptyTree = TreeHead [TreeLeaf]
@@ -138,3 +138,22 @@ startWith (c : str) node =
 
 toUpperCase :: String -> String
 toUpperCase = map toUpper
+
+unionTrees :: TreeNode -> TreeNode -> TreeNode
+unionTrees (TreeHead list1) (TreeHead list2) = unionTrees' (TreeHead list1) (toList (TreeHead list2))
+  where
+    unionTrees' node [] = node
+    unionTrees' node (s : strs) = unionTrees' (insert s node) strs
+unionTrees _ _ = error "union should be applied to head"
+
+instance Semigroup TreeNode where
+    (<>) = unionTrees
+
+instance Monoid TreeNode where
+    mempty = emptyTree
+
+instance Eq TreeNode where
+    (TreeHead list1) == (TreeHead list2) = sort (toList (TreeHead list1)) == sort (toList (TreeHead list2))
+    TreeLeaf == TreeLeaf = True
+    (TreeNode c1 list1) == (TreeNode c2 list2) = sort (toList' (TreeNode c1 list1) "") == sort (toList' (TreeNode c2 list2) "")
+    _ == _ = False
