@@ -20,6 +20,10 @@ getChildren (TreeNode _ list) = list
 getChildren (TreeHead list) = list
 getChildren TreeLeaf = []
 
+isHead :: TreeNode -> Bool
+isHead (TreeHead _) = True
+isHead _ = False
+
 hasLetter :: Char -> TreeNode -> Bool
 hasLetter c node = any checkChild (getChildren node)
   where
@@ -60,7 +64,28 @@ insert (c : str) (TreeNode c' list) =
         Just node -> TreeNode c' (replaceChild node (insert str (TreeNode c (getChildren node))) list) -- replace & move forward through that node
 
 remove :: String -> TreeNode -> TreeNode
-remove str node = node -- TODO:
+remove "" (TreeHead list) = TreeHead list -- neutral elem
+remove "" (TreeNode c list) = TreeNode c list
+remove "" TreeLeaf = TreeHead [] -- signal that we should not add it to upper list
+remove _ TreeLeaf = TreeLeaf
+remove (c : str) (TreeHead list) =
+    case findChild c list of
+        Nothing -> TreeHead list
+        Just node ->
+          if isHead node'
+            then TreeHead (filter (/= node) list)
+            else TreeHead $ replaceChild node node' list
+              where
+                node' = remove str node
+remove (c : str) (TreeNode c' list) =
+    case findChild c list of
+        Nothing -> TreeHead list
+        Just node ->
+          if isHead node'
+            then if length list == 1 then TreeHead [] else TreeNode c' (filter (/= node) list)
+            else TreeNode c' $ replaceChild node node' list
+              where
+                node' = remove str node
 
 fromList' :: [String] -> TreeNode -> TreeNode
 fromList' list node = foldr insert node list
