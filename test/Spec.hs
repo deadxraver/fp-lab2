@@ -8,6 +8,7 @@ list1 = ["hello"]
 main :: IO ()
 main = do
     setTest
+    mapTest
     removeTest
 
 runTest :: Bool -> String -> IO ()
@@ -18,3 +19,6 @@ setTest = runTest (fromList list1 == fromList list1dup) "Set"
 
 removeTest :: IO ()
 removeTest = runTest (emptyTree == remove "hello" (fromList ["hello"])) "Remove"
+
+mapTest :: IO ()
+mapTest = runTest (map' toUpperCase (fromList ["hello"]) == fromList ["HELLO"]) "Map"

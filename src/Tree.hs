@@ -6,9 +6,12 @@ module Tree (
     remove,
     clear,
     emptyTree,
+    map',
+    toUpperCase
 ) where
 
 import Data.List (find)
+import Data.Char
 
 data TreeNode = TreeNode Char [TreeNode] | TreeHead [TreeNode] | TreeLeaf deriving (Eq, Show)
 
@@ -111,3 +114,6 @@ clear _ = error "Passed not head"
 map' :: (String -> String) -> TreeNode -> TreeNode
 map' f (TreeHead list) = fromList (map f (toList (TreeHead list)))
 map' _ _ = error "Map should be applied to head"
+
+toUpperCase :: String -> String
+toUpperCase s = map toUpper s

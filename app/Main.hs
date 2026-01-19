@@ -18,7 +18,8 @@ main = do
     print nodeFromStr
     print $ toList nodeFromStr
     print $ toList $ insert "hello" nodeFromStr
-    print $ toList $ remove "hell" $ insert "hello" nodeFromStr
+    print $ toList $ remove "hell" nodeFromStr
+    print $ toList $ map' toUpperCase nodeFromStr
     print $ remove "hello" (fromList ["hello"])
     print $ toList $ fromList ["Abab", "AZaz"]
     print $ toList $ fromList ["hello", "hello"]
