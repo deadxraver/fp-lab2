@@ -11,6 +11,7 @@ main = do
     mapTest
     filterTest
     removeTest
+    prefixTest
 
 runTest :: Bool -> String -> IO ()
 runTest cond testName = print $ if cond then testName ++ " test passed" else error (testName ++ " test failed")
@@ -26,3 +27,6 @@ mapTest = runTest (map' toUpperCase (fromList ["hello"]) == fromList ["HELLO"]) 
 
 filterTest :: IO ()
 filterTest = runTest (filter' (\s -> length s > 5) (fromList ["1234", "12345", "123456"]) == fromList ["123456"]) "Filter"
+
+prefixTest :: IO ()
+prefixTest = runTest (startWith "ab" (fromList ["a", "ab", "aba", "abb", "abba", "ba", "bba"]) == ["ab", "aba", "abb", "abba"]) "Prefix"

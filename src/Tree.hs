@@ -9,6 +9,7 @@ module Tree (
     map',
     toUpperCase,
     filter',
+    startWith,
 ) where
 
 import Data.Char
@@ -122,6 +123,18 @@ map' _ _ = error "Map should be applied to head"
 filter' :: (String -> Bool) -> TreeNode -> TreeNode
 filter' f (TreeHead list) = fromList (filter f (toList (TreeHead list)))
 filter' _ _ = error "Filter should be applied to head"
+
+startWith :: String -> TreeNode -> [String]
+startWith "" (TreeHead list) = toList $ TreeHead list
+startWith "" node = toList' node ""
+startWith (c : "") node =
+    case findChild c (getChildren node) of
+        Nothing -> []
+        Just node' -> startWith "" node'
+startWith (c : str) node =
+    case findChild c (getChildren node) of
+        Nothing -> []
+        Just node' -> map (c :) (startWith str node')
 
 toUpperCase :: String -> String
 toUpperCase = map toUpper
