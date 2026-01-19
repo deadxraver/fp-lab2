@@ -107,3 +107,7 @@ toList (TreeHead (node : list)) = toList' node "" ++ toList (TreeHead list)
 clear :: TreeNode -> TreeNode
 clear (TreeHead _) = emptyTree
 clear _ = error "Passed not head"
+
+map' :: (String -> String) -> TreeNode -> TreeNode
+map' f (TreeHead list) = fromList (map f (toList (TreeHead list)))
+map' _ _ = error "Map should be applied to head"
