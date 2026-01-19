@@ -26,3 +26,4 @@ main = do
     print $ toList $ fromList ["Abab", "AZaz"]
     print $ toList $ fromList ["hello", "hello"]
     print $ startWith "ab" $ fromList ["a", "ab", "aba", "abab", "bb", "bab"]
+    print $ mapNodes succ nodeFromStr

@@ -20,6 +20,7 @@ unitTests = do
     prefixTest
     monoTest1
     monoTest2
+    nodeMapTest
     putStrLn "All unit tests passed\n"
 
 runTest :: Bool -> String -> IO ()
@@ -45,3 +46,8 @@ monoTest1 = runTest (fromList ["hello"] <> emptyTree == fromList ["hello"]) "Mon
 
 monoTest2 :: IO ()
 monoTest2 = runTest ((fromList ["str1"] <> fromList ["str2"]) <> fromList ["str3"] == fromList ["str1"] <> (fromList ["str2"] <> fromList ["str3"])) "Mono2"
+
+nodeMapTest :: IO ()
+nodeMapTest = runTest (mapNodes succ (fromList [str]) == fromList [map succ str]) "NodeMap"
+  where
+    str = "amsomwomwodm"

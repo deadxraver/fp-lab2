@@ -10,6 +10,7 @@ module Tree (
     toUpperCase,
     filter',
     startWith,
+    mapNodes,
 ) where
 
 import Data.Char
@@ -119,6 +120,11 @@ clear _ = error "Passed not head"
 map' :: (String -> String) -> TreeNode -> TreeNode
 map' f (TreeHead list) = fromList (map f (toList (TreeHead list)))
 map' _ _ = error "Map should be applied to head"
+
+mapNodes :: (Char -> Char) -> TreeNode -> TreeNode
+mapNodes _ TreeLeaf = TreeLeaf
+mapNodes f (TreeHead list) = TreeHead (map (mapNodes f) list)
+mapNodes f (TreeNode c list) = TreeNode (f c) (map (mapNodes f) list)
 
 filter' :: (String -> Bool) -> TreeNode -> TreeNode
 filter' f (TreeHead list) = fromList (filter f (toList (TreeHead list)))
